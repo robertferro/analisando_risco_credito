@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import pickle
 
 
@@ -19,7 +18,7 @@ st.sidebar.title('Dados do Cliente')
 
 
 st.markdown('---')
-st.markdown('### Dados do hitórico financeiro e de posses do proponente')
+st.markdown('### Histórico financeiro,tipo de moradia e objetivo do empréstimo')
 st.markdown(' ')
 
 # sidebar
@@ -30,87 +29,63 @@ x2 = st.sidebar.slider('Tempo de Emprego', 0, 41, 5, 1)
 col1, col2 = st.beta_columns(2)
 x3 = col1.radio('Tipo de Moradia', ['alugada','hipoteca', 'propria','outro'])
 x4 = col1.radio('Objetivo do Empréstimo', ['consolidacao_debito','educacao', 'pessoal','risco', 'reformar_casa','saude' ])
-x5 = col1.slider('Montante do Empréstimo', 0,35000,1000,50)
-# x6 = st.selectbox('Taxa de Juros', 1,24,2,0.1)
-x7 =  col2.slider('Renda por ano', 0,205000,10000,250)
-# x8 = st.slider('Porcentagem da renda anual', 0,1,.5)
-x9 = col2.selectbox('Classificação de risco histórico',['A','B', 'C', 'D', 'E', 'F', 'G'])
-x10 = col2.selectbox('Inadimplência histórica', [0,1])
+
+
+x9 = col2.radio('Classificação de risco histórico',['A','B', 'C', 'D', 'E', 'F', 'G'])
+x10 = col2.radio('Inadimplência histórica', [0,1])
 x11 = col2.slider('Quantidade de anos do primeiro emprestimo ', 0,20,1,1)
- 
-# x9 = st.sidebar.selectbox('Status', ['masculino/divorciado', 'feminino/divorciado',
-#        'masculino/solteiro', 'masculino/casado'])
-# x20 = st.sidebar.selectbox('Estrangeiro', ['não', 'sim'])
-# x18 = st.sidebar.selectbox('Dependentes', [1,2])
-# x17 = st.sidebar.selectbox('Trabalho', ['desempregado',  'nível 1',  'nível 2',  'nível 3' ])
-# x7 = st.sidebar.selectbox('Emprego', ['desempregado', '< 1 ano',  '[1,4) anos',
-#         '[4,7) anos', '> 7 anos'])
-
-
-# col1, col2, col3, col4 = st.beta_columns(4)
-# # col1
-# x1 = col1.radio('Conta', ['negativo', '[0-200)', '200+', 'sem conta'], help = 'Essa variável é tchululu tchalala')
-# x14 = col1.radio('Financiamentos', ['bancos', 'lojas', 'nenhum'])
-# x15 = col1.radio('Moradia', ['alugada', 'própria', 'de graça'])
-
-# # col2
-# x6 = col2.radio('Poupança', ['<100', '[100-500)', '[500-1000)',
-#        '>1000', 'sem conta'])
-# x10 = col2.radio('Garantia', ['nenhum', 'co-aplicante', 'fiador'])
-# x11 = col2.radio('Residencia', [1,2,3,4])
-
-# # col3
-# x3 = col3.radio('Historico', ['primeira vez', 'creditos quitados', 'pagamento em dia', 
-#        'já atrasou pagamentos', 'conta crítica'])
-# x16 = col3.radio('Creditos', [1, 2, 3, 4])
-# x12 = col3.radio('Propriedades', ['imobiliario', 'seguro  de vida',
-#       'carro', 'sem propriedades'])
-
-# # col4
-# x8 = col4.radio('Taxa', [1,2,3, 4])
-# x19 = col4.radio('Telefone', [ 'não', 'sim'])
 
 
 
-# st.markdown('---')
-# st.markdown('### Dados referentes ao empréstimo')
+st.markdown('---')
+st.markdown('### Dados referentes ao empréstimo')
+x5 = st.slider('Montante do Empréstimo', 0,35000,1000,50)
+x6 = st.slider('Taxa de Juros', 1,24,11,1)
+x7 =  st.slider('Renda por ano', 0,205000,10000,250)
+x8 = (float(x5/x7)*100)
+st.write('Porcentagem da renda anual {}%'.format(round(x8,2)))
 
-# col1, col2 = st.beta_columns(2)
-# x4 = col1.radio('Motivo', ['carro novo', 'carro usado', 'móveis', 
-#        'radio/televisão', 'itens de casa', 'reparos', 
-#        'educação', 'férias', 'retreinamentos', 
-#        'negócios', 'outros'])
-# x2 = col2.slider('Duração', 3, 72, 12, 1)
-# x5 = col2.slider('Quantia', 250, 25000, 1000, 50)
+st.markdown('### Simulação')
 
-# st.markdown('---')
-
-
- 
-# dicionario  =  {'idade':[X1], 
-# 		  'tempo_de_emprego',
-# 		  'tipo_moradia', 
-# 		  'objetivo_emprestimo',
-#        	  'montante_emprestimo', 
-#        	  'taxa_juros', 
-#        	  'renda_por_ano',
-#        	  'porc_empr_renda_anual', 
-#        	  'class_risco_historico', 
-#        	  'inadimplencia_hist',
-#        	  'qtd_anos_primeiro_emprestimo', 
-#        	  'risco_emprestimo'}
-
-# dados = pd.DataFrame(dicionario) 
-
-# st.write(dados)
-
-# st.markdown('---')
-
-# modelo = load_model('best_rf_model')
+# Criando um dataframe para entrada do modelo 
+dicionario  =  {'idade':[x1], 
+		  'tempo_de_emprego':x2,
+		  'tipo_moradia':[x3], 
+		  'objetivo_emprestimo':[x4],
+       	  'montante_emprestimo':[x5], 
+       	  'taxa_juros':[x6/100], 
+       	  'renda_por_ano':[x7],
+       	  'porc_empr_renda_anual':[x8/100], 
+       	  'class_risco_historico':[x9], 
+       	  'inadimplencia_hist':[x10],
+       	  'qtd_anos_primeiro_emprestimo':[x11]}
 
 
+dados = pd.DataFrame(dicionario) 
 
-# if st.button('EXECUTAR O MODELO'):
+#  encoding das variaveis categoricas do dataframe
+dic_tipo_moradia={'propria':0, 'hipoteca':1, 'alugada':2, 'outro':3}
+dados['tipo_moradia'] = dados['tipo_moradia'].map(dic_tipo_moradia)
+
+dic_objetivo_emprestimo={'educacao':0, 'saude':1, 'risco':2, 'pessoal':3, 'reformar_casa':4,'consolidacao_debito':5}
+dados['objetivo_emprestimo'] = dados['objetivo_emprestimo'].map(dic_objetivo_emprestimo)
+
+dic_class_risco_historico={'A':0,'B':1,'C':2,'D':3,'E':4,'F':5,'G':6}
+dados['class_risco_historico'] = dados['class_risco_historico'].map(dic_class_risco_historico)
+
+
+st.write(dados)
+
+st.markdown('---')
+
+modelo = open('modelo_analise_credito', 'rb')
+modelo = pickle.load(modelo)
+
+
+
+if st.button('Executar a Simulação'):
+	proba = modelo.predict_proba(dados)[:,1]
+	st.markdown('probabilidade: {}'.format(proba))
 # 	saida = predict_model(modelo, dados)
 # 	prob = float(saida['Score'])
 # 	clas = int(saida['Label']) 

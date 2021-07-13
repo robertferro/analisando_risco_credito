@@ -16,7 +16,7 @@ pagina=st.sidebar.selectbox('Selecione a opção que deseja navegar',paginas)
 
 # page1
 if pagina=='Home':
-	imagem = 'img2.jpg'
+	imagem = 'img3.jpg'
 	st.markdown('# **Seja bem vindo** ao analisedecreditoapp')
 	st.image(imagem,use_column_width='always')
 

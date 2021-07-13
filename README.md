@@ -1,14 +1,14 @@
 # Análise de risco de credito
 
+link do dataset: https://www.kaggle.com/laotse/credit-risk-dataset?select=credit_risk_dataset.csv
+
 # Problema: 
- - Reduzir o índice de inacimplência.
- - 
+ - Reduzir o índice de inadimplência.
+ 
 # Solução:
 
  - Foi desenvolvido um modelo de machine learning que a partir das variáveis de entrada, é capaz de identificar quando o empréstimo é de risco ou não, com uma precisão de 95% para casos de risco, e que é capaz de reduzir cerca de 14% a inadimplência.
 
-
-link do dataset: https://www.kaggle.com/laotse/credit-risk-dataset?select=credit_risk_dataset.csv
 
 Utilizando o dataset acima, foi desenvolvido um projeto com objetivo de fazer uma análise exploratória dos dados e desenvolver um modelo utilizando machine learning de análise de risco de crédito.
 

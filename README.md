@@ -18,5 +18,5 @@ Logo após isso foi feito uma análise exploratória dos dados, selecionando as 
 
 Após desenvolver um modelo, a solução foi entregue via web app, onde utilizei a biblioteca streamlit do python para criar toda a interface e também fazer o deploy do modelo.
 
-link do webapp: 
+link do webapp: https://share.streamlit.io/robertferro/analisando_risco_credito/main/credit_score.py
 

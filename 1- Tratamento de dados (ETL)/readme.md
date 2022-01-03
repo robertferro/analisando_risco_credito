@@ -1,1 +1,1 @@
-Utilizando o datset de risco de crédito que se encontra acessando este link: https://www.kaggle.com/laotse/credit-risk-dataset/code, foi feito um tratamento de dados.
+Utilizando o datset de risco de crédito que se encontra neste link: https://www.kaggle.com/laotse/credit-risk-dataset/code, foram feitas algumas transformações nos dados e tratamento de dados incossistentes, ausentes e também de outliers.
